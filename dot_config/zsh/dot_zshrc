@@ -1,0 +1,124 @@
+#!/bin/sh (for helix)
+unsetopt BEEP
+export EDITOR=nvim
+
+# ls on changed dir
+chpwd() exa --icons --group-directories-first || ls
+
+# Enable colors and change prompt:
+autoload -U colors && colors
+
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:git*' formats "(%b) "
+precmd() {
+    vcs_info
+}
+prompt='${vcs_info_msg_0_}%B%{$fg[red]%}[%{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b '
+
+
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+setopt autocd	# Automatically cd into typed directory.
+stty stop undef		# Disable ctrl-s to freeze terminal.
+setopt interactive_comments
+setopt hist_ignore_all_dups
+
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=~/.cache/zsh/history
+
+# Load aliases and shortcuts if existent.
+source "$XDG_CONFIG_HOME/shell/shortcutrc"
+source "$XDG_CONFIG_HOME/shell/aliasrc"
+source "$XDG_CONFIG_HOME/shell/zshnameddirrc"
+source "$XDG_CONFIG_HOME/shell/functions" 2> /dev/null
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+
+# Git
+gacp() {
+    [ -z "$1" ] && echo "please provide commit message" && exit 1
+    git add .
+    git commit -m "$1"
+    git push
+    git log --graph --decorate --oneline --all --color | head -n 5
+}
+
+
+# bindkey -s '^z' 'nvim ~/.config/zsh/.zshrc\nsource ~/.config/zsh/.zshrc'
+# bindkey -s '^x' 'cd ~/.config/nvim/ && nvim . \n cd - \n'
+# bindkey -s '^s' 'sudo !!'
+# bindkey -s '^g' '"$(fd -t d -H | fzf)"\t'
+cdfzf() {
+    file=$(fd --type f | fzf)
+    [ -z "$file" ] && exit 1
+    cd "$(dirname $file)"
+}
+bindkey -s '^f' 'cdfzf\n'
+bindkey "^[[B" history-beginning-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey -s '^o' 'lfub\n'
+
+vp() {
+    [ -f "$1" ] || [ -d "$1" ] && exit 1
+    mkdir -pv "$(dirname $1)"
+    $VISUAL "$1"
+}
+vb() {
+    echo '#!/bin/sh' >> "$1"
+    chmod +x "$1"
+    $VISUAL "$1"
+}
+vw() {
+    w=$(which "$1")
+    [ -f "$w" ] && $VISUAL "$w"
+}
+
+export fpath=("$HOME/.local/bin/completion" $fpath)
+
+source "$XDG_DATA_HOME/miniconda3/etc/profile.d/conda.sh"
+
+export WORKING_DIR_FILE="$HOME/.cache/wdirfile"
+[ ! -f "$WORKING_DIR_FILE" ] && echo "$HOME" > "$WORKING_DIR_FILE"
+[ "$PWD" = "$HOME" ] && cd $(\cat $WORKING_DIR_FILE) 2> /dev/null
+
+# Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
