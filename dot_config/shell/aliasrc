@@ -1,0 +1,52 @@
+#!/bin/sh
+alias \
+    ls="exa --icons --group-directories-first" \
+    la="exa -a --icons --group-directories-first" \
+    ll="exa -al --icons --group-directories-first" \
+    l="ls" \
+    e="$EDITOR" \
+    v="$VISUAL" \
+    z="zathura"\
+    c="bat" \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    bc="bc -ql" \
+    mkd="mkdir -pv" \
+    rm="rmtrash -I" \
+    rmdir="rmdirtrash" \
+    cat="bat" \
+    less="bat --paging=always" \
+    config='git --git-dir=$HOME/.cfg --work-tree=$HOME' \
+    gl="git log --graph --decorate --oneline --all" \
+    cl="config log --graph --decorate --oneline --all" \
+    ctl="sudo systemctl" \
+    uctl="systemctl --user" \
+    p="sudo pacman" \
+    cs="mamba search -c conda-forge" \
+    ci="mamba install -c conda-forge" \
+    ca="conda activate" \
+    ka="killall -v" \
+    g="git" \
+    yt="yt-dlp --add-metadata -i" \
+    yta="yt -x -f bestaudio/best" \
+    yts="yt-dlp --default-search ytsearch" \
+    YT="youtube-viewer" \
+    trem="transmission-remote" \
+    sdn="shutdown -h now" \
+    ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
+    julia="julia --project" \
+    ipython="ipython --no-confirm-exit --no-banner" \
+    tectonic="tectonic -X" \
+    startx="startx $XDG_CONFIG_HOME/X11/xinitrc" \
+    chromium="chromium --ozone-platform-hint=auto" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    kssh="kitty +kitten ssh -L 16006:127.0.0.1:6006" \
+    vim="echo use v or e" \
+    ffmpeg="ffmpeg -hide_banner" \
+    giturl="echo 'git@github.com:HansMartinJ'" \
+    gitraw="echo 'https://raw.githubusercontent.com'" \
+
+
+
+

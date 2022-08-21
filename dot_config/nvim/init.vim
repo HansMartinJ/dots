@@ -1,5 +1,6 @@
 lua << EOF
 local home = os.getenv("HOME")
+local share = os.getenv("XDG_DATA_HOME")
 vim.opt.tabstop=4 
 vim.opt.softtabstop=4
 vim.opt.shiftwidth=4
@@ -18,7 +19,7 @@ vim.opt.backup=false
 vim.opt.wrap=false
 vim.opt.wrapscan=false
 vim.opt.swapfile=false
-vim.opt.undodir= home .. "/.local/share/nvim/undodir"
+vim.opt.undodir= share .. "/share/nvim/undodir"
 vim.opt.undofile=true
 vim.opt.undolevels=1000
 vim.opt.undoreload=10000

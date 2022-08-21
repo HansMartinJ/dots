@@ -1,0 +1,20 @@
+
+bf      $XDG_CONFIG_HOME/shell/bm-files
+bd      $XDG_CONFIG_HOME/shell/bm-dirs
+cfa     $XDG_CONFIG_HOME/shell/aliasrc
+cfp     $XDG_CONFIG_HOME/shell/profile
+
+
+cfv	$XDG_CONFIG_HOME/nvim/init.vim
+cfx	$XDG_CONFIG_HOME/X11/xinitrc
+cfm	$XDG_CONFIG_HOME/kmonad/thinkpad.kbd
+cfk $XDG_CONFIG_HOME/kak/kakrc
+cfkt $XDG_CONFIG_HOME/kitty/kitty.conf
+cfq $XDG_CONFIG_HOME/qutebrowser/config.py
+cff $XDG_CONFIG_HOME/foot/foot.ini
+cfz	$XDG_CONFIG_HOME/zsh/.zshrc
+cfr	$XDG_CONFIG_HOME/river/init
+cfh	$XDG_CONFIG_HOME/helix/config.toml
+cfl	$XDG_CONFIG_HOME/lf/lfrc
+cfL	$XDG_CONFIG_HOME/lf/scope
+cfb	$XDG_CONFIG_HOME/yambar/config.yml

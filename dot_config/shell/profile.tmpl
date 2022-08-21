@@ -1,0 +1,143 @@
+#!/bin/sh
+export TERMINAL="kitty"
+export BROWSER="qutebrowser"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export SYSTEMD_EDITOR="$EDITOR"
+export PATH="$PATH:$HOME/.local/share/npm/bin"
+export PATH="$PATH:$HOME/.local/share/miniconda3/bin"
+
+binpath=$(find $HOME/.local/bin/ -type d -printf '%p:' | sed "s/:$//g")
+binalias="$HOME/.local/binalias"
+export PATH="$binalias:$PATH:$binpath"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+
+export XKB_DEFAULT_LAYOUT="no"
+
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
+export SPACEVIMDIR="$XDG_CONFIG_HOME/spacevim"
+
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export SSB_HOME="$XDG_DATA_HOME/zoom"
+export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+export PYLINTHOME="$XDG_CACHE_HOME/pylint"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export LESSHISTFILE="-"
+export JULIA_NUM_THREADS=4
+
+# This is the list for lf icons:
+export LF_ICONS="di=📁:\
+fi=📃:\
+tw=🤝:\
+ow=📂:\
+ln=⛓:\
+or=❌:\
+ex=🎯:\
+*.txt=✍:\
+*.mom=✍:\
+*.me=✍:\
+*.ms=✍:\
+*.png=🖼:\
+*.webp=🖼:\
+*.ico=🖼:\
+*.jpg=📸:\
+*.jpe=📸:\
+*.jpeg=📸:\
+*.gif=🖼:\
+*.svg=🗺:\
+*.tif=🖼:\
+*.tiff=🖼:\
+*.xcf=🖌:\
+*.html=🌎:\
+*.xml=📰:\
+*.gpg=🔒:\
+*.css=🎨:\
+*.pdf=📚:\
+*.djvu=📚:\
+*.epub=📚:\
+*.csv=📓:\
+*.xlsx=📓:\
+*.tex=📜:\
+*.md=📘:\
+*.r=📊:\
+*.R=📊:\
+*.rmd=📊:\
+*.Rmd=📊:\
+*.m=📊:\
+*.mp3=🎵:\
+*.opus=🎵:\
+*.ogg=🎵:\
+*.m4a=🎵:\
+*.flac=🎼:\
+*.wav=🎼:\
+*.mkv=🎥:\
+*.mp4=🎥:\
+*.webm=🎥:\
+*.mpeg=🎥:\
+*.avi=🎥:\
+*.mov=🎥:\
+*.mpg=🎥:\
+*.wmv=🎥:\
+*.m4b=🎥:\
+*.flv=🎥:\
+*.zip=📦:\
+*.rar=📦:\
+*.7z=📦:\
+*.tar.gz=📦:\
+*.z64=🎮:\
+*.v64=🎮:\
+*.n64=🎮:\
+*.gba=🎮:\
+*.nes=🎮:\
+*.gdi=🎮:\
+*.1=ℹ:\
+*.nfo=ℹ:\
+*.info=ℹ:\
+*.log=📙:\
+*.iso=📀:\
+*.img=📀:\
+*.bib=🎓:\
+*.ged=👪:\
+*.part=💔:\
+*.torrent=🔽:\
+*.jar=♨:\
+*.java=♨:\
+"
+
+# wayland
+#export QT_QPA_PLATFORM=wayland
+#export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+#export MOZ_ENABLE_WAYLAND=1
+
+#[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
+
+
+
+{{ if eq .chezmoi.os "linux" }}
+export XDG_DESKTOP_DIR="$HOME/.xdg/desktop"
+export XDG_DOCUMENTS_DIR="$HOME/.xdg/documents"
+export XDG_DOWNLOAD_DIR="$HOME/.xdg/downloads"
+export XDG_MUSIC_DIR="$HOME/.xdg/music"
+export XDG_PICTURES_DIR="$HOME/.xdg/pictures"
+export XDG_VIDEOS_DIR="$HOME/.xdg/videos"
+export XDG_PUBLICSHARE_DIR="$HOME/.xdg/public"
+export XDG_TEMPLATES_DIR="$HOME/.xdg/templates"
+{{ end }}
+

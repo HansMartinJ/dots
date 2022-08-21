@@ -1,0 +1,13 @@
+cache $XDG_CACHE_HOME
+cfg $XDG_CONFIG_HOME
+dw $XDG_DOWNLOAD_DIR
+dc $XDG_DOCUMENTS_DIR
+m $XDG_MUSIC_DIR
+h $HOME
+m $XDG_MUSIC_DIR
+share $XDG_DATA_HOME
+bin $HOME/.local/bin
+src $HOME/.local/src
+mnt /mnt
+books $XDG_DOCUMENTS_DIR/books
+shell $XDG_CONFIG_HOME/shell
